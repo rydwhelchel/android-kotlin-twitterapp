@@ -4,7 +4,7 @@ import android.content.Context
 import com.codepath.asynchttpclient.RequestParams
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler
 import com.codepath.oauth.OAuthBaseClient
-import com.github.scribejava.apis.FlickrApi
+import com.github.scribejava.apis.TwitterApi
 import com.github.scribejava.core.builder.api.BaseApi
 
 /*
@@ -19,7 +19,7 @@ import com.github.scribejava.core.builder.api.BaseApi
  * NOTE: You may want to rename this object based on the service i.e TwitterClient or FlickrClient
  *
  */
-class RestClient(context: Context) : OAuthBaseClient(
+class TwitterClient(context: Context) : OAuthBaseClient(
     context, REST_API_INSTANCE, REST_URL, REST_CONSUMER_KEY, REST_CONSUMER_SECRET,
     null, String.format(
         REST_CALLBACK_URL_TEMPLATE,
@@ -31,34 +31,35 @@ class RestClient(context: Context) : OAuthBaseClient(
 ) {
 
     companion object {
-        val REST_API_INSTANCE = FlickrApi.instance(FlickrApi.FlickrPerm.WRITE) // Change this
-
-        const val REST_URL = "https://api.flickr.com/services" // Change this, base API URL
+        val REST_API_INSTANCE: TwitterApi = TwitterApi.instance()
+        //TODO: Try using twitter apiv2
+        const val REST_URL = "https://api.twitter.com/1.1"
 
         const val REST_CONSUMER_KEY =
-            BuildConfig.CONSUMER_KEY // Change this inside apikey.properties
+            BuildConfig.CONSUMER_KEY
 
         const val REST_CONSUMER_SECRET =
-            BuildConfig.CONSUMER_SECRET // Change this inside apikey.properties
+            BuildConfig.CONSUMER_SECRET
 
         // Landing page to indicate the OAuth flow worked in case Chrome for Android 25+ blocks navigation back to the app.
         const val FALLBACK_URL =
             "https://codepath.github.io/android-rest-client-template/success.html"
 
-        // See https://developer.chrome.com/multidevice/android/intents
+        // See https://developer.chrome.comx/multidevice/android/intents
         const val REST_CALLBACK_URL_TEMPLATE =
             "intent://%s#Intent;action=android.intent.action.VIEW;scheme=%s;package=%s;S.browser_fallback_url=%s;end"
     }
 
     // CHANGE THIS
     // DEFINE METHODS for different API endpoints here
-    fun getInterestingnessList(handler: JsonHttpResponseHandler) {
+    fun getHomeTimeline(handler: JsonHttpResponseHandler) {
         val apiUrl =
-            getApiUrl("?nojsoncallback=1&method=flickr.interestingness.getList")
+            getApiUrl("statuses/home_timeline.json")
 
         // Can specify query string params directly or through RequestParams.
         val params = RequestParams()
-        params.put("format", "json")
+        params.put("count", "25")
+        params.put("since_id", "1")
         client.get(apiUrl, params, handler)
     }
 
