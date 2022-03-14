@@ -24,6 +24,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Username" />
 
+<!--    TODO: Fix text body not wrapping when reaching end -->
     <TextView
         android:id="@+id/tvTweetBody"
         android:layout_width="wrap_content"

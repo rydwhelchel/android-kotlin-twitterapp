@@ -50,8 +50,6 @@ class TwitterClient(context: Context) : OAuthBaseClient(
             "intent://%s#Intent;action=android.intent.action.VIEW;scheme=%s;package=%s;S.browser_fallback_url=%s;end"
     }
 
-    // CHANGE THIS
-    // DEFINE METHODS for different API endpoints here
     fun getHomeTimeline(handler: JsonHttpResponseHandler) {
         val apiUrl =
             getApiUrl("statuses/home_timeline.json")
