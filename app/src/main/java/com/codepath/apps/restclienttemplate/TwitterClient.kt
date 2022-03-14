@@ -7,18 +7,6 @@ import com.codepath.oauth.OAuthBaseClient
 import com.github.scribejava.apis.TwitterApi
 import com.github.scribejava.core.builder.api.BaseApi
 
-/*
- *
- * This is the object responsible for communicating with a REST API.
- * Specify the constants below to change the API being communicated with.
- * See a full list of supported API classes:
- *   https://github.com/scribejava/scribejava/tree/master/scribejava-apis/src/main/java/com/github/scribejava/apis
- * Key and Secret are provided by the developer site for the given API i.e dev.twitter.com
- * Add methods for each relevant endpoint in the API.
- *
- * NOTE: You may want to rename this object based on the service i.e TwitterClient or FlickrClient
- *
- */
 class TwitterClient(context: Context) : OAuthBaseClient(
     context, REST_API_INSTANCE, REST_URL, REST_CONSUMER_KEY, REST_CONSUMER_SECRET,
     null, String.format(
@@ -32,7 +20,7 @@ class TwitterClient(context: Context) : OAuthBaseClient(
 
     companion object {
         val REST_API_INSTANCE: TwitterApi = TwitterApi.instance()
-        //TODO: Try using twitter apiv2
+
         const val REST_URL = "https://api.twitter.com/1.1"
 
         const val REST_CONSUMER_KEY =
@@ -60,13 +48,4 @@ class TwitterClient(context: Context) : OAuthBaseClient(
         params.put("since_id", "1")
         client.get(apiUrl, params, handler)
     }
-
-    /* 1. Define the endpoint URL with getApiUrl and pass a relative path to the endpoint
-	 * 	  i.e getApiUrl("statuses/home_timeline.json")
-	 * 2. Define the parameters to pass to the request (query or body)
-	 *    i.e val params = RequestParams("foo", "bar")
-	 * 3. Define the request method and make a call to the client
-	 *    i.e client.get(apiUrl, params, handler)
-	 *    i.e client.post(apiUrl, params, handler)
-	 */
 }
