@@ -32,6 +32,8 @@ class Tweet {
             return tweets
         }
 
+        // Gets the time difference between the created_at date (from Twitter API) and now
+        // Function courtesy of the guide linked
         fun getTimeDifference(rawJsonDate: String?): String? {
             var time: String? = ""
             val twitterFormat = "EEE MMM dd HH:mm:ss ZZZZZ yyyy"
