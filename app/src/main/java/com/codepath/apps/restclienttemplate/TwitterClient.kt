@@ -42,10 +42,20 @@ class TwitterClient(context: Context) : OAuthBaseClient(
         val apiUrl =
             getApiUrl("statuses/home_timeline.json")
 
-        // Can specify query string params directly or through RequestParams.
+        // Can specify query string params directly or through RequestParams
         val params = RequestParams()
         params.put("count", "25")
         params.put("since_id", "1")
         client.get(apiUrl, params, handler)
+    }
+
+    fun publishTweet(tweetContent: String, handler: JsonHttpResponseHandler) {
+        val apiUrl =
+            getApiUrl("statuses/update.json")
+
+        // Can specify query string params directly or through RequestParams
+        val params = RequestParams()
+        params.put("status", tweetContent)
+        client.post(apiUrl, params, "", handler)
     }
 }
