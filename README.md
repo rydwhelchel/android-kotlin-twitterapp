@@ -1,4 +1,4 @@
-# Project 2 - Simple Tweeter*
+# Project 2 - *Simple Tweeter*
 
 Simple Tweeter is an android app that allows a user to view his Twitter timeline. The app utilizes [Twitter REST API](https://dev.twitter.com/rest/public).
 
